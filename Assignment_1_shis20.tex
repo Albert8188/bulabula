@@ -1,0 +1,317 @@
+\documentclass[11pt,fleqn]{article}
+
+\setlength {\topmargin} {-.15in}
+\setlength {\textheight} {8.6in}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{color}
+
+\renewcommand{\labelenumii}{\theenumii.}
+
+\newcommand{\mname}[1]{\mbox{\sf #1}}
+\newcommand{\pnote}[1]{{\langle \text{#1} \rangle}}
+
+\begin{document}
+
+\begin{center}
+
+  {\large \textbf{COMPSCI/SFWRENG 2FA3}}\\[2mm]
+  {\large \textbf{Discrete Mathematics with Applications II}}\\[2mm]
+  {\large \textbf{Winter 2021}}\\[8mm]
+  {\huge \textbf{Assignment 1}}\\[6mm]
+  {\large \textbf{Dr.~William M. Farmer and Dr.~Mehrnoosh Askarpour}}\\[2mm]
+  {\large \textbf{McMaster University}}\\[6mm]
+  {\large Revised: January 21, 2021}
+
+\end{center}
+
+\medskip
+
+Assignment 1 consists of some background definitions, two sample
+problems, and two required problems.  You must write your solutions to
+the required problems using LaTeX.  Use the solutions of the sample
+problems as a guide.
+
+Please submit Assignment~1 as two files,
+\texttt{Assignment\_1\_\emph{YourMacID}.tex} and
+\texttt{Assignment\_1\_\emph{YourMacID}.pdf}, to the Assignment~1
+folder on Avenue under Assessments/Assignments.
+\texttt{\emph{YourMacID}} must be your personal MacID (written without
+capitalization).  The \texttt{Assignment\_1\_\emph{YourMacID}.tex}
+file is a copy of the LaTeX source file for this assignment
+(\texttt{Assignment\_1.tex} found on Avenue under
+Contents/Assignments) with your solution entered after each required
+problem.  The \texttt{Assignment\_1\_\emph{YourMacID}.pdf} is the PDF
+output produced by executing
+
+\begin{itemize}
+
+  \item[] \texttt{pdflatex Assignment\_1\_\emph{YourMacID}}
+
+\end{itemize}
+
+This assignment is due \textbf{Sunday, January 31, 2021 before
+  midnight.}  You are allow to submit the assignment multiple times,
+but only the last submission will be marked.  \textbf{Late submissions
+  and files that are not named exactly as specified above will not be
+  accepted!}  It is suggested that you submit your preliminary
+\texttt{Assignment\_1\_\emph{YourMacID}.tex} and
+\texttt{Assignment\_1\_\emph{YourMacID}.pdf} files well before the
+deadline so that your mark is not zero if, e.g., your computer fails
+at 11:50 PM on January 31.
+
+\textbf{Although you are allowed to receive help from the
+  instructional staff and other students, your submission must be your
+  own work.  Copying will be treated as academic dishonesty! If any of
+  the ideas used in your submission were obtained from other students
+  or sources outside of the lectures and tutorials, you must
+  acknowledge where or from whom these ideas were obtained.}
+
+\subsection*{Background}
+
+\begin{enumerate}
+
+  \item The notation $\sum^{n}_{i=m}f(i)$ is defined by: 
+    \[\sum^{n}_{i=m}f(i) =
+      \left\{\begin{array}{ll}
+               0                            & \textrm{if } m > n\\
+               \big(\sum^{n-1}_{i=m}f(i)\big) + f(n) & \textrm{if } m \le n
+             \end{array}
+      \right.\]
+
+  \item The notation $\prod^{n}_{i=m}f(i)$ is defined by: 
+    \[\prod^{n}_{i=m}f(i) =
+      \left\{\begin{array}{ll}
+               1                             & \textrm{if } m > n\\
+               \big(\prod^{n-1}_{i=m}f(i)\big) * f(n) & \textrm{if } m \le n
+             \end{array}
+      \right.\] 
+
+  \item The factorial function $\mname{fact} : \mathbb{N} \rightarrow
+    \mathbb{N}$ is defined by:
+    \[\mname{fact}(n) = 
+      \left\{\begin{array}{ll}
+               1 & \textrm{if } n = 0 \\
+               \mname{fact}(n-1) * n & \textrm{if } n > 0 
+             \end{array}
+      \right.\]
+
+  \item The Fibonacci sequence $\mname{fib} : \mathbb{N} \rightarrow
+    \mathbb{N}$ is defined by:
+    \[\mname{fib}(n) = 
+      \left\{\begin{array}{ll}
+               0 & \textrm{if } n = 0 \\
+               1 & \textrm{if } n = 1 \\
+               \mname{fib}(n-1) + \mname{fib}(n-2) & \textrm{if } n \ge 2
+             \end{array}
+      \right.\]
+
+\end{enumerate}
+
+\subsection*{Sample Problems}
+
+\begin{enumerate}
+
+  \item Prove $\sum^{n-1}_{i=0}2^i = 2^n - 1$ for all $n \in
+    \mathbb{N}$.
+
+\begin{proof}
+Let $P(n) \equiv \sum^{n-1}_{i=0}2^i = 2^n - 1$.  We will prove $P(n)$
+for all $n \in \mathbb{N}$ by weak induction.
+
+\medskip
+
+\emph{Base case}: $n = 0$.  We must show $P(0)$.
+\begin{align*}
+  &\phantom{{}=} \sum_{i=0}^{0-1} 2^{i} & \pnote{LHS of $P(0)$}\\
+  &= \sum^{-1}_{i = 0} 2^i  & \pnote{arithmetic}\\
+  &= 0          & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$ when $m > n$}\\
+  &= 1 - 1      & \pnote{arithmetic}\\
+  &= 2^0 - 1    & \pnote{arithmetic; RHS of $P(0)$}
+\end{align*}
+So $P(0)$ holds.
+
+\medskip
+
+\emph{Induction step}: $n \ge 0$. Assume $P(n)$. We must show $P(n + 1)$.
+\begin{align*}
+  &\phantom{{}=} \sum_{i=0}^{(n + 1) - 1} 2^i   & \pnote{LHS of $P(n + 1)$}\\
+  &= \sum_{i=0}^{n} 2^{i}       & \pnote{arithmetic}\\
+  &= \big(\textstyle{\sum}_{i=0}^{n-1} 2^i\big) + 2^n & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$}\\
+  &= (2^n - 1) + 2^n           & \pnote{induction hypothesis: $P(n)$}\\
+  &= 2*2^n - 1                 & \pnote{arithmetic}\\
+  &= 2^{n+1} - 1               & \pnote{arithmetic; RHS of $P(n + 1)$}
+\end{align*}
+So $P(n + 1)$ holds.
+
+\medskip
+
+Therefore, $P(n)$ holds for all $n \in \mathbb{N}$ by weak induction.
+\end{proof}
+
+  \item Prove that, if $n \in \mathbb{N}$ with $n \ge 2$, then $n$ is
+    a prime number or a product of prime numbers.
+
+\begin{proof}
+Let $P(n)$ hold iff $n$ is a product of prime numbers.  We will prove
+$P(n)$ for all $n \in \mathbb{N}$ with $n \ge 2$ by strong induction.
+
+\medskip
+
+\emph{Base case}: $n = 2$.  We must show $P(2)$.  Since 2 is a prime
+number, $P(2)$ obviously holds.
+
+\medskip
+
+\emph{Induction step}: $n > 2$.  Assume $P(2), P(3), \ldots, P(n-1)$
+hold.  We must show $P(n)$.
+
+\emph{Case 1}: $n$ is a prime number.  Then $P(n)$ obviously holds.
+
+\emph{Case 2}: $n$ is not a prime number.  Then $n = x * y$ where $x,y
+\in \mathbb{N}$ with $2 \le x,y \le n - 1$.  Thus, by the induction
+hypothesis ($P(x)$ and $P(y)$), \[x = p_0 * \cdots *p_i\] and \[y =
+q_0 * \cdots *q_j\] where $p_0,\ldots,p_i,q_0,\ldots,q_j$ are prime
+numbers.  Then \[n = x * y = p_0 * \cdots * p_i * q_0 * \cdots * q_j\]
+and so $P(n)$ holds since $n$ is a product of prime numbers.
+
+\medskip
+
+Therefore, $P(n)$ holds for all $n \in \mathbb{N}$ with $n \ge 2$ by
+strong induction.
+\end{proof}
+
+\end{enumerate}
+
+\subsection*{Required Problems}
+
+\begin{enumerate}
+
+  \item \textbf{[10 points]} Prove \[\sum^{n}_{i = 0} i *
+    \mname{fact}(i) = \mname{fact}(n+1) - 1\] for all $n \in
+    \mathbb{N}$.
+
+  
+
+  \textcolor{blue}{\textbf{Shuting Shi, shis20, 1/31}}
+
+\begin{proof}
+Let $P(n) \equiv \sum^{n}_{i=0}i*\mname{fact}(i) =\mname{fact}(n+1)-1$.  We will prove $P(n)$
+for all $n \in \mathbb{N}$ by weak induction.
+
+\medskip
+
+\emph{Base case}: $n = 0$.  We must show $P(0)$.
+\begin{align*}
+  &\phantom{{}=} \sum_{i=0}^{0}i*\mname{fact}(i) & \pnote{LHS of $P(0)$}\\
+  &= \big(\textstyle{\sum}_{i=0}^{0-1} i*\mname{fact}(i)\big)+ \mname{fact}(0)*(0) & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$ when $m \le n$}\\
+  &= \big(\textstyle{\sum}_{i=0}^{-1} i*\mname{fact}(i)\big)         & \pnote{arithmetic}\\
+  &= 0      & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$ when $m > n$}\\
+  &=1*1-1 	& \pnote{arithmetic}\\
+  &=\mname{fact}(0)*1-1	& \pnote{definition of $\mname{fact}(n)$ when $n = 0$}\\
+  &=\mname{fact}(1-0)*1-1	& \pnote{arithmetic}\\
+  &=\mname{fact}(1)-1	& \pnote{definition of $\mname{fact}(n)$ when $n > 0$}\\
+  &=\mname{fact}(0+1)-1	& \pnote{arithmetic; RHS of $P(n + 1)$}
+\end{align*}
+So $P(0)$ holds.
+
+\medskip
+
+\emph{Induction step}: $n \ge 0$. Assume $P(n)$. We must show $P(n + 1)$.
+\begin{align*}
+  &\phantom{{}=} \sum_{i=0}^{n + 1} i*\mname{fact}(i)   & \pnote{LHS of $P(n + 1)$}\\
+  &=  \sum_{i=0}^{n} i*\mname{fact}(i)  + (n+1)*\mname{fact}(n+1)     & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$}\\
+  &= \mname{fact}(n+1) - 1 + (n+1)*\mname{fact}(n+1) & \pnote{induction hypothesis: $P(n)$}\\
+  &= (n+2)*\mname{fact}(n+1) - 1          & \pnote{arithmetic}\\
+  &= \mname{fact}(n+1)  * (n+2) -1               & \pnote{definition of $\mname{fact}(n)$ when $n > 0$}\\
+  &=  \mname{fact}(n+2) - 1	& \pnote{arithmetic}\\
+  &=  \mname{fact}((n+1)+1) - 1            & \pnote{arithmetic; RHS of $P(n + 1)$}
+\end{align*}
+So $P(n + 1)$ holds.
+
+\medskip
+
+Therefore, $P(n)$ holds for all $n \in \mathbb{N}$ by weak induction.
+\end{proof}
+
+
+  \bigskip
+
+  \item \textbf{[10 points]} Prove that, for all $n \in \mathbb{N}$,
+    $\mname{fib}(n)$ is even if $n = 3k$ for some $k \in \mathbb{N}$,
+    is odd if $n = 3k + 1$ for some $k \in \mathbb{N}$, and is odd if
+    $n = 3k + 2$ for some $k \in \mathbb{N}$.
+
+  \bigskip
+
+  \textcolor{blue}{\textbf{Shuting Shi, shis20, 1/31}}
+
+ \begin{proof}
+    Let $P(n)$ holds iff $\mname{fib} (n)$ is even if $n = 3k$, is odd if $n = 3k + 1$, and is odd if $n = 3k + 2$. 
+    We will prove $P(n)$ for all $n \in \mathbb{N}$ with $k \in \mathbb{N}$ by strong induction.
+
+    \medskip
+
+    \emph{Base case}: n = 0. We must show $P(0)$ is even, $P(1)$ is odd, and $P(2)$ is odd.
+    
+    \emph{Case 1}: We must show $P(0)$ is even. Since $\mname{fib}(0) = 0$ according to the definition, $P(0)$ obviously holds as 0 is even.
+
+    \emph{Case 2}: We must show $P(1)$ is odd. Since $\mname{fib}(1) = 1$ according to the definition, $P(0)$ obviously holds as 1 is odd.
+    
+    \emph{Case 3}: We must show $P(2)$ is odd, the prove is shown below.
+    \begin{align*}
+      & \phantom{{}=} \mname{fib}(2) 	& \pnote{LHS of $P(2)$}\\
+      & = \mname{fib}(2 - 1) + \mname{fib}(2 - 2)	& \pnote{definition of $\mname{fib}(n)$ when $n \ge 2$}\\
+      & = \mname{fib}(1) + \mname{fib}(0)	& \pnote{arithmetic}\\
+      & = 0 + 1	& \pnote{definition of $\mname{fib}(n)$ when $n = 0$ and $n = 1$}\\
+      & = 1	& \pnote{arithmetic}
+    \end{align*}
+    Since 1 is odd, so $P(2)$ holds.
+
+    \medskip
+
+    \emph{Induction Step}: $n \ge 1$. Assume $P(2), P(3),\ldots, P(n-1)$ hold. We must show $P(n)$ holds.
+    
+    \emph{Case 1}: $n = 3k$. We must show $P(n)$ is even.
+    \begin{align*}
+      & \phantom{{}=} \mname{fib}(n)	& \pnote{LHS of $P(n)$}\\
+      & = \mname{fib} (n - 1) + \mname{fib} (n - 2)		& \pnote{definition of \mname{fib}(n) when $n \ge 2$}\\
+      & = \mname{fib} (3k - 1) + \mname{fib} (3k - 2)	& \pnote{plug into $n = 3k$}\\
+      & = \mname{fib} (3 * (k - 1) + 2) + \mname{fib} (3 * (k - 1) + 1)	& \pnote{arithmetic}
+    \end{align*}
+    By the induction hypothesis of $P(n-1)$ and $P(n-2)$, $\mname{fib} (3 * (k - 1) + 2)$ is an odd number 
+    and $\mname{fib} (3 * (k - 1) + 1)$ is also an odd number.  Because an odd number plus another odd number results an even number, $P(n)$ for Case 1 holds.
+
+    \emph{Case 2}: $n = 3k + 1$. We must show $P(n)$ is odd.
+    \begin{align*}
+      & \phantom{{}=} \mname{fib}(n) & \pnote{LHS of $P(n)$}\\
+      & = \mname{fib} (n - 1) + \mname{fib} (n - 2) & \pnote{definition of \mname{fib}(n) when $n \ge 2$}\\
+      & = \mname{fib} ((3k + 1) - 1) + \mname{fib} ((3k + 1) - 2) & \pnote{plug into $n = 3k + 1$}\\
+      & = \mname{fib} (3k) + \mname{fib} (3 * (k - 1) + 2) & \pnote{arithmetic}
+    \end{align*}
+    By the induction hypothesis of  $P(n-1)$ and $P(n-2)$, $\mname{fib} (3k)$ is an even number 
+    and $\mname{fib} (3 * (k - 1) + 2)$ is an odd number. Because an even number plus an odd number results an odd number, $P(n)$ for Case 2 holds.
+
+    \emph{Case 3}: $n = 3k + 2$. We must show $P(n)$ is odd.
+    \begin{align*}
+      & \phantom{{}=} \mname{fib}(n) & \pnote{LHS of $P(n)$}\\
+      & = \mname{fib} (n - 1) + \mname{fib} (n - 2) & \pnote{definition of \mname{fib}(n) when $n \ge 2$}\\
+      & = \mname{fib} ((3k + 2) - 1) + \mname{fib} ((3k + 2) - 2) & \pnote{plug into $n = 3k + 2$}\\
+      & = \mname{fib} (3k + 1) + \mname{fib} (3k) & \pnote{arithmetic}
+    \end{align*}
+    By the induction hypothesis of $P(n-1)$ and $P(n-2)$, $\mname{fib} (3k + 1)$ is an odd number 
+    and $\mname{fib} (3k)$ is an even number. Because an odd number plus an even number results an odd number, $P(n)$ for Case 3 holds.
+
+    \medskip
+
+    Therefore, $P(n)$ holds for all $n \in \mathbb{N}$ by strong induction.
+  \end{proof} 
+
+\end{enumerate}
+
+\end{document}
+
+
+
