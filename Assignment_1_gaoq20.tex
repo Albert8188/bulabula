@@ -198,16 +198,14 @@ strong induction.
   \textcolor{blue}{\textbf{Qiang Gao, gaoq20, 1/31}}
 
 \begin{proof}
-Let $P(n) \equiv \sum^{n}_{i=0}i*\mname{fact}(i) =\mname{fact}(n+1)-1$.  We will prove $P(n)$
+$P(n) \equiv \sum^{n}_{i=0}i*\mname{fact}(i) =\mname{fact}(n+1)-1$. We will prove $P(n)$
 for all $n \in \mathbb{N}$ by weak induction.
-
 \medskip
-
-\emph{Base case}: P(0)$ \equiv \phantom{{}=} \sum_{i=0}^{0}i*\mname{fact}(i) = \mname{fact}(0+1)-1
+\emph{Base case}: $P(0)$
 \begin{align*}
   &\phantom{{}=} \sum_{i=0}^{0}i*\mname{fact}(i) & \pnote{LHS of $P(0)$}\\
-  &= (\textstyle{\sum}_{i=0}^{0-1} i*\mname{fact}(i) + 0*\mname{fact}(0) & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$ when $m \le n$}\\
-  &= (\textstyle{\sum}_{i=0}^{-1} i*\mname{fact}(i)         & \pnote{arithmetic}\\
+  &= \textstyle{\sum}_{i=0}^{0-1} i*\mname{fact}(i) + 0*\mname{fact}(0) & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$ when $m \le n$}\\
+  &= \textstyle{\sum}_{i=0}^{-1} i*\mname{fact}(i)         & \pnote{arithmetic}\\
   &= 0      & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$ when $m > n$}\\
   &=1*1-1 	& \pnote{arithmetic}\\
   &=\mname{fact}(0)*1-1	& \pnote{definition of $\mname{fact}(n)$ when $n = 0$}\\
@@ -216,25 +214,20 @@ for all $n \in \mathbb{N}$ by weak induction.
   &=\mname{fact}(0+1)-1	& \pnote{arithmetic; RHS of $P(n + 1)$}
 \end{align*}
 $P(0)$ holds.
-
 \medskip
-
-\emph{Induction step}: $n \ge 0$. We show $P(n + 1)$ assuming $P(n)$. $P(n)$ \equiv \phantom{{}=} \sum_{i=0}^{n + 1} i*\mname{fact}(i) = \mname{fact}((n+1)+1) - 1
+\emph{Induction step}: $n \ge 0$. We show $P(n + 1)$ assuming $P(n)$.
 \begin{align*}
   &\phantom{{}=} \sum_{i=0}^{n + 1} i*\mname{fact}(i)   & \pnote{LHS of $P(n + 1)$}\\
-  &=  \sum_{i=0}^{n} i*\mname{fact}(i)  + (n+1)*\mname{fact}(n+1)     & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$}\\
+  &= \sum_{i=0}^{n} i*\mname{fact}(i)  + (n+1)*\mname{fact}(n+1)     & \pnote{definition of $\textstyle{\sum}_{i=m}^{n} f(i)$}\\
   &= \mname{fact}(n+1) - 1 + (n+1)*\mname{fact}(n+1) & \pnote{induction hypothesis: $P(n)$}\\
   &= (n+1+1)*\mname{fact}(n+1+1-1) - 1          & \pnote{arithmetic}\\
-  &=  \mname{fact}((n+1)+1) - 1            & \pnote{definition of $\mname{fact}(n)$ when $n > 0$; RHS of $P(n + 1)$}
+  &=  \mname{fact}((n+1)+1) - 1            & \pnote{definition of $\mname{fact}(n)$; RHS of $P(n + 1)$}
 \end{align*}
 $P(n + 1)$ holds.
-
 \medskip
 
 Therefore, $P(n)$ holds for all $n \in \mathbb{N}$ by weak induction.
 \end{proof}
-
-
   \bigskip
 
   \item \textbf{[10 points]} Prove that, for all $n \in \mathbb{N}$,
@@ -251,7 +244,6 @@ Therefore, $P(n)$ holds for all $n \in \mathbb{N}$ by weak induction.
     We will prove $P(n)$ for all $n \in \mathbb{N}$ with $k \in \mathbb{N}$ by strong induction.
 
     \medskip
-
     \emph{Base case}:
     
     \emph{Case 1}: $P(0)$: $\mname{fib}(0) = 0$ ,which is even, and 0 = 3 * 0, $P(0)$ holds.
@@ -261,7 +253,6 @@ Therefore, $P(n)$ holds for all $n \in \mathbb{N}$ by weak induction.
     \emph{Case 3}: $P(2)$: $\mname{fib}(2) = 1$ ,which is odd, and 2 = 3 * 0 + 2, $P(2)$ holds.
 
     \medskip
-
     \emph{Induction Step}: $n \ge 1$. We must show $P(n)$ holds assuming $P(a)$, a$<$n holds.
     
     \emph{Case 1}: $n = 3k$. We must show $P(n)$ is even.
@@ -292,7 +283,6 @@ Therefore, $P(n)$ holds for all $n \in \mathbb{N}$ by weak induction.
     and an odd number plus even number results an odd number, Case 3 holds.
 
     \medskip
-
     Therefore, $P(n)$ holds for all $n \in \mathbb{N}$ by strong induction.
   \end{proof} 
 

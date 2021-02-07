@@ -130,9 +130,54 @@ Let \mname{SimpleTree} be the inductive
   Prove that, for all $t \in \mname{SimpleTree}$, \[\mname{leaves}(t) \le
   \mname{branches}(t) + 1.\]
 
-  \textcolor{blue}{\textbf{Put your name, MacID, and date here.}}
+  \textcolor{blue}{\textbf{Qiang Gao, gaoq20, 2/6/2021}}
 
-  \textcolor{blue}{\textbf{Put your solution here.}}
+\begin{proof}
+Let $P(t) \equiv \mname{leaves}(t) \le
+  \mname{branches}(t) + 1$.  We will prove $P(t)$
+for all $t \in \mname{SimpleTree}$ by strong induction.
+
+\medskip
+
+\emph{Base case}: $t = \mname{Leaf}(n)$.  We must show $P(\mname{Leaf}(n))$.
+\begin{align*}
+  &$P(\mname{Leaf}(n))$\\
+  &\equiv \mname{leaves}(\mname{Leaf}(n)) \le \mname{branches}(\mname{Leaf}(n)) + 1 \\
+  &\equiv 1 \le \mname{branches}(\mname{Leaf}(n)) + 1          & \pnote{definition of $\mname{leaves}$}\\
+  &\equiv 1 \le 0 + 1          & \pnote{definition of $\mname{branches}$}\\
+  &\equiv 1 \le 1 	& \pnote{arithmetic}\\
+  &\equiv True
+\end{align*}
+So $P(\mname{Leaf}(n))$ holds.
+
+\medskip
+
+\emph{Induction step}:
+\emph{Case 1}: We assume $P(t)$ holds for $t \in \mname{SimpleTree}$, prove $P(\mname{Branch1}(t))$
+\begin{align*}
+  &\mname{leaves}(\mname{Branch1}(t))\\
+  &= \mname{leaves}(t) & \pnote{definition of $\mname{leaves}$}\\
+  &\le \mname{branches}(t) + 1  & \pnote{induction hypothesis}\\
+  &\le \mname{branches}(t) + 1 + 1 & \pnote{arithmetic}\\
+  &= \mname{branches}(\mname{Branch1}(t)) + 1 & \pnote{definition of $\mname{branches}$}\\
+\end{align*}
+So $P(\mname{Branch1}(t))$ holds.
+
+\medskip
+
+\emph{Case 2}: We assume $P(t_1)$ and $P(t_2)$ holds for $t_1,$t_2 \in \mname{SimpleTree}$, prove $P(\mname{Branch2}(t_1,t_2))$
+\begin{align*}
+  &\mname{leaves}(\mname{Branch2}(t_1,t_2))\\
+  &= \mname{leaves}(t_1) + \mname{leaves}(t_2) & \pnote{definition of $\mname{leaves}$}\\
+  &\le \mname{branches}(t_1) + 1 + \mname{branches}(t_2) + 1 & \pnote{induction hypothesis}\\
+  &= \mname{branches}(\mname{Branch2}(t_1,t_2)) + 1 & \pnote{definition of $\mname{branches}$}\\
+\end{align*}
+So $P(\mname{Branch2}(t_1,t_2))$ holds.
+
+\medskip
+
+Therefore, $P(t)$ holds for all $t \in \mname{SimpleTree}$ by strong induction.
+\end{proof}
 
   \bigskip
 
@@ -260,9 +305,113 @@ Let \mname{SimpleTree} be the inductive
 
   \bigskip
 
-  \textcolor{blue}{\textbf{Put your name, MacID, and date here.}}
+  \textcolor{blue}{\textbf{Qiang Gao, gaoq20, 2/6/2021}}
+\\\\
+In order to prove Theorem 1 better, we introduce Lemma 2 and Lemma 3.
+\textbf{Lemma 2}. For all $u,v \in \mname{BinNum}$
 
-  \textcolor{blue}{\textbf{Put your solution here.}}
+$\mname{len}(u) + \mname{len}(v) \le \mname{len}(\mname{JoinOne}(u)) + \mname{len}(\mname{JoinOne}(v))$
+
+\textbf{Lemma 3}. For all $u,v \in \mname{BinNum}$
+
+$\mname{len}(\mname{add}(u,v)) +\mname{len}(\mname{JoinOne}(\mname{Zero})) \le \mname{len}(\mname{JoinOne}(u)) + \mname{len}(\mname{JoinOne}(v))$
+  
+\begin{proof}:
+\\\\
+\emph{Lemma 2}:
+\begin{align*}
+  & \mname{len}(u) + \mname{len}(v)\\
+  & \le \mname{len}(u) + 1 + \mname{len}(v) + 1 & \pnote{arithmetic}\\
+  &= \mname{len}(\mname{JoinOne}(u)) + \mname{len}(\mname{JoinOne}(v)) & \pnote{definition of \mname{len}}\\
+\end{align*}
+
+
+\emph{Lemma 3}:
+\begin{align*}
+  & \mname{len}(\mname{add}(u,v)) + \mname{len}(\mname{JoinOne}(\mname{Zero}))  & \pnote{LHS}\\
+  & \le \mname{len}(u) + \mname{len}(v) + \mname{len}(\mname{JoinOne}(\mname{Zero}))  & \pnote{Lemma 1}\\
+  &= \mname{len}(u) + \mname{len}(v) +  \mname{len}(\mname{Zero}) + 1  & \pnote{definition of \mname{len}}\\
+  &= \mname{len}(u) + \mname{len}(v) +1 + 1  & \pnote{definition of \mname{len}}\\
+  &= \mname{len}(\mname{JoinOne}(u)) + \mname{len}(\mname{JoinOne}(v))  & \pnote{definition of \mname{len}}\\
+\end{align*}
+
+We now prove \textbf{Thereom 1}
+
+\emph{Proof}: We assume $P(a)$ for all a $<$ n, and prove $P(n)$ by strong induction.
+
+\emph{Case 1}: $v = \mname{Zero}$
+\begin{align*}
+  &\mname{val}(\mname{add}(u,\mname{Zero})) & \pnote{LHS}\\
+  &= \mname{val}(u)  & \pnote{definition of \mname{add}}\\
+  &= \mname{val}(u) + 0 & \pnote{arithmetic}\\
+  &= \mname{val}(u) +  \mname{val}(\mname{Zero}) & \pnote{definition of \mname{val}}\\
+\end{align*}
+
+
+\emph{Case 2}: $u = \mname{Zero}$.
+\begin{align*}
+  &\mname{val}(\mname{add}(\mname{Zero},v)) & \pnote{LHS}\\
+  &= \mname{val}(u)  & \pnote{definition of \mname{add}}\\
+  &= 0 + \mname{val}(u)  & \pnote{arithmetic}\\
+  &= \mname{val}(\mname{Zero}) +  \mname{val}(v) & \pnote{definition of \mname{val}}\\
+\end{align*}
+
+
+\emph{Case 3}: $u = \mname{JoinZero}(u\prime)$ and $v = \mname{JoinZero}(v\prime)$
+\begin{align*}
+  &\mname{val}(\mname{add}(\mname{JoinZero}(u\prime),\mname{JoinZero}(v\prime))) & \pnote{LHS}\\
+  &= \mname{val}(\mname{JoinZero}(\mname{add}(u\prime,v\prime)))  & \pnote{definition of \mname{add}}\\
+  &= 2 * \mname{val}((\mname{add}(u\prime,v\prime)))  & \pnote{definition of \mname{val}}\\
+  &= 2 * ( \mname{val}(u\prime)+\mname{val}(v\prime)) & \pnote{Induction Hypothesis}\\
+  &= 2 * ( \mname{val}(u\prime)) + 2 * ( \mname{val}(v\prime)) & \pnote{arithmetic}\\
+  &=  \mname{val}(\mname{JoinZero}(u\prime)) + \mname{val}(\mname{JoinZero}(v\prime)) 
+  & \pnote{definition of \mname{val}}\\
+\end{align*}
+
+\emph{Case 4}: $u =\mname{JoinOne}(u\prime)$, $v =\mname{JoinZero}(v\prime)$
+\begin{align*}
+  &\mname{val}(\mname{add}(\mname{JoinOne}(u\prime),\mname{JoinZero}(v\prime))) & \pnote{LHS}\\
+  &= \mname{val}(\mname{JoinOne}(\mname{add}(u\prime,v\prime)))  & \pnote{definition of \mname{add}}\\
+  &= 2 * \mname{val}((\mname{add}(u\prime,v\prime))) + 1  & \pnote{definition of \mname{val}}\\
+  &= 2 * ( \mname{val}(u\prime)+\mname{val}(v\prime)) + 1 & \pnote{Induction Hypothesis}\\
+  &= 2 * ( \mname{val}(u\prime)) + 1 + 2 * ( \mname{val}(v\prime)) & \pnote{arithmetic}\\
+  &=  \mname{val}(\mname{JoinOne}(u\prime)) + \mname{val}(\mname{JoinZero}(v\prime)) 
+  & \pnote{definition of \mname{val}}\\
+\end{align*}
+
+\emph{Case 5}: $u =\mname{JoinZero}(u\prime)$, $v =\mname{JoinOne}(v\prime)$. 
+\begin{align*}
+  &\mname{val}(\mname{add}(\mname{JoinZero}(u\prime),\mname{JoinOne}(v\prime))) & \pnote{LHS}\\
+  &= \mname{val}(\mname{JoinOne}(\mname{add}(u\prime,v\prime)))  & \pnote{definition of \mname{add}}\\
+  &= 2 * \mname{val}((\mname{add}(u\prime,v\prime))) + 1  & \pnote{definition of \mname{val}}\\
+  &= 2 * ( \mname{val}(u\prime)+\mname{val}(v\prime)) + 1 & \pnote{Induction Hypothesis}\\
+  &= 2 * ( \mname{val}(u\prime)) + 2 * ( \mname{val}(v\prime)) + 1 & \pnote{arithmetic}\\
+  &=  \mname{val}(\mname{JoinZero}(u\prime)) + \mname{val}(\mname{JoinOne}(v\prime)) 
+  & \pnote{definition of \mname{val}}\\
+\end{align*}
+
+
+\emph{Case 6}:  $u =\mname{JoinOne}(u\prime)$, $v =\mname{JoinOne}(v\prime)$
+\begin{align*}
+  &\mname{val}(\mname{add}(\mname{JoinOne}(u\prime),\mname{JoinOne}(v\prime))) 
+  & \pnote{LHS}\\
+  &= \mname{val}((\mname{JoinZero}(\mname{add}(\mname{add}(u\prime, v\prime), \mname{One})))
+  &= 2 * \mname{val}(\mname{add}(\mname{add}(u\prime, v\prime), \mname{One}))
+  & \pnote{definition of \mname{add}}\\
+  &= 2 * (\mname{val}(\mname{add}(u\prime,v\prime)) + \mname{val}(\mname{One}))
+  & \pnote{definition of \mname{val}}\\
+  &= 2 * (\mname{val}(u\prime) + \mname{val}(v\prime + \mname{val}(\mname{One}))
+  & \pnote{Induction Hypothesis}\\
+  &= 2 * (\mname{val}(u\prime) + \mname{val}(v\prime + 1)
+  & \pnote{definition of \mname{val}}\\
+  &= (2 * \mname{val}(u\prime) + 1) + (2 * \mname{val}(v\prime) + 1) 
+  & \pnote{arithmetic}\\
+  &= \mname{val}(\mname{JoinOne}(u\prime)) + \mname{val}(\mname{JoinOne}(v\prime)) 
+  & \pnote{definition of \mname{val}}\\
+\end{align*}
+
+So P(n) has been successfully proved by strong induction.
+\end{proof}
 
 \ee
 
