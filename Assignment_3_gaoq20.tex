@@ -141,6 +141,8 @@ in $\Sigma^*$ for which the formula is true.  For example, if $a \in
 \Sigma$, then $\ForallApp x \mdot \mname{last}(x) \rightarrow a(x)$ specifies
 the language $\set{ua \mid u \in \Sigma^*}$.
 
+  \textcolor{blue}{\textbf{Qiang Gao, gaoq20, 2/13/2021}}
+
 \subsection*{Problems}
 
 \be
@@ -153,15 +155,47 @@ the language $\set{ua \mid u \in \Sigma^*}$.
   \be
 
     \item Prove that $(\Sigma^*,\le)$ is a weak partial order.
-
+\medskip
+\\\\
+\emph{Reflective}:According to the definiton of \le, $u \le v$ means there are $x,y \in \Sigma^*$ such that $xuy = v$. When x and y are both empty word $\epsilon$, $u \le u$ holds.
+\\\\
+\emph{Antisymmetric}:
+\begin{align*}
+  & u \le v \wedge v \le u\\
+  &\Leftrightarrow  x_1uy_1 = v \wedge x_2vy_2 = u & \pnote{definition}\\ 
+  &\Leftrightarrow  x_2x_1uy_1y_2 = u       & \pnote{logic}\\
+  &\Leftrightarrow  x_2x_1 = \epsilon \wedge  y_1y_2 =  \epsilon        & \pnote{logic}\\
+  &\Leftrightarrow x_2 = \epsilon \wedge x_1 = \epsilon \wedge  y_1 = \epsilon \wedgey_2 =  \epsilon 	& \pnote{logic}\\
+  &\implies u = v \\
+\end{align*}
+\\\\
+\emph{Transitive}:
+\begin{align*}
+  & u \le v \wedge v \le w\\
+  &\Leftrightarrow  x_1uy_1 = v \wedge x_2vy_2 = w & \pnote{definition}\\
+  &\Leftrightarrow  x_2x_1uy_1y_2 = w       & \pnote{logic}\\
+  &\Leftrightarrow  u \le w     & \pnote{definition}\\
+\end{align*}
+\\\\
+Therefore, $(\Sigma^*,\le)$ is a weak partial order
+\medskip
     \item Prove that $(\Sigma^*,\le)$ is not a weak total order.
-
+\medskip
+\\\\
+According to the prove above, $(\Sigma^*,\le)$ is reflective and antisymmetric, therefore, $(\Sigma^*,\le)$ is not a weak total order.
+\medskip
     \item Does $(\Sigma^*,\le)$ have a minimum element?  Justify your
       answer.
-
+\medskip
+\\\\
+$\epsilon$ is a subword of any $v$ for $v \in \Sigma^*$, therefore, $\epsilon$ is the minimum element of $(\Sigma^*,\le)$.
+\medskip
     \item Does $(\Sigma^*,\le)$ have a maximum element?  Justify your
       answer.
-
+\medskip
+\\\\
+There is no a word that all the rest of words are subwords of it. Therefore, there is not maximum element of $(\Sigma^*,\le)$.
+\medskip
   \ee
 
   \item \textbf{[8 points]} Let $\Sigma = \set{a,b,c}$ be a finite
@@ -171,21 +205,47 @@ the language $\set{ua \mid u \in \Sigma^*}$.
   \be
 
     \item $\set{awa \mid w \in \Sigma^*}$.
-
+    \medskip
+    \\\\
+    $\ForallApp x \ForallApp y \mdot  \mname{last}(x) \wedge \mname{first}(y) \rightarrow a(x) \wedge a(y)$
+    \\\\
+    ($\mname{first}(x)$ asserts that position $x$ is the first position in a word)
+    \medskip
     \item $\set{dwd \mid d \in \Sigma \text{ and } w \in \Sigma^*}$.
-
+    \medskip
+    \\\\
+    $\ForallApp x \ForallApp y \mdot  (\mname{last}(x) \wedge \mname{first}(y) \rightarrow \exists d \mdot d(x) \wedge d(y))$
+    \medskip
     \item $\set{uaav \mid u, v \in \Sigma^*}$.
-    
+    \medskip
+    \\\\
+    $\exists x \mdot a(x) \implies a(x+1)$
+    \medskip
     \item $\set{uavbw \mid u,v,w \in \Sigma^*}$.
-
+    \medskip
+    \\\\
+    $\exists x \mdot (a(x) \implies \exists y \mdot b(y) \wedge x < y)$
+    \medskip
     \item $\Sigma^*$.
-
+    \medskip
+    \\\\
+    $\exists x \mdot \lnot a(x) \wedge \lnot b(x) \wedge \lnot c(x) $
+    \medskip
     \item $\Sigma^* \setminus \set{\epsilon}$.
-
+    \medskip
+    \\\\
+    $\ForallApp x \mdot a(x) \lor b(x) \lor c(x) $
+    \medskip
     \item $\set{\epsilon}$.
-
+    \medskip
+    \\\\
+    $\ForallApp x \mdot \lnot (a(x) \lor b(x) \lor c(x)) $
+    \medskip
     \item $\emptyset$.
-
+    \medskip
+    \\\\
+    $\ForallApp x  \mdot  a(x) \wedge b(x)$
+    \medskip
   \ee
 
 \ee
