@@ -1,0 +1,154 @@
+\documentclass[11pt,fleqn]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+
+\lstset{language=python,basicstyle=\ttfamily,breaklines=true,showspaces=false,showstringspaces=false,breakatwhitespace=true,texcl=true,escapeinside={\%*}{*)}}
+
+\setlength {\topmargin} {-.15in}
+\setlength {\textheight} {8.6in}
+
+\renewcommand{\labelenumi}{\theenumi.}
+\renewcommand{\labelenumii}{\theenumii.}
+\renewcommand{\labelenumiii}{\theenumiii.}
+\newcommand{\be}{\begin{enumerate}}
+	\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+	\newcommand{\ei}{\end{itemize}}
+\newcommand{\bc}{\begin{center}}
+	\newcommand{\ec}{\end{center}}
+\newcommand{\bsp}{\begin{sloppypar}}
+	\newcommand{\esp}{\end{sloppypar}}
+\newcommand{\sglsp}{\ }
+\newcommand{\dblsp}{\ \ }
+\newcommand{\mdot}{\mathrel.}
+\newcommand{\mname}[1]{\mbox{\sf #1}}
+\newcommand{\ForallApp}{\forall\,}
+\newcommand{\ImpliesAlt}{\Rightarrow}
+\newenvironment{proof}{\par\noindent{\bf Proof\sglsp}}{\hfill$\Box$}
+\newcommand{\pnote}[1]{{\langle \text{#1} \rangle}} 
+
+\begin{document}
+	
+	\begin{center}
+		
+		{\large \textbf{COMPSCI/SFWRENG 2FA3}}\\[2mm]
+		{\large \textbf{Discrete Mathematics with Applications II}}\\[2mm]
+		{\large \textbf{Winter 2021}}\\[8mm]
+		{\huge \textbf{Assignment 6}}\\[6mm]
+		{\large \textbf{Dr.~William M. Farmer and Dr.~Mehrnoosh Askarpour}}\\[2mm]
+		{\large \textbf{McMaster University}}\\[6mm]
+		{\large Revised: March 10, 2021}
+		
+	\end{center}
+	
+	\medskip
+	
+	Assignment 6 consists of two problems.  You must write your solutions
+	to the problems using LaTeX.
+	
+	Please submit Assignment~6 as two files,
+	\texttt{Assignment\_6\_\emph{YourMacID}.tex} and
+	\texttt{Assignment\_6\_\emph{YourMacID}.pdf}, to the Assignment~6
+	folder on Avenue under Assessments/Assignments.
+	\texttt{\emph{YourMacID}} must be your personal MacID (written without
+	capitalization).  The \texttt{Assignment\_6\_\emph{YourMacID}.tex}
+	file is a copy of the LaTeX source file for this assignment
+	(\texttt{Assignment\_6.tex} found on Avenue under
+	Contents/Assignments) with your solution entered after each problem.
+	The \texttt{Assignment\_6\_\emph{YourMacID}.pdf} is the PDF output
+	produced by executing
+	
+	\begin{itemize}
+		
+		\item[] \texttt{pdflatex Assignment\_6\_\emph{YourMacID}}
+		
+	\end{itemize}
+	
+	This assignment is due \textbf{Sunday, March 14, 2021 before midnight.}
+	You are allow to submit the assignment multiple times, but only the
+	last submission will be marked.  \textbf{Late submissions and files
+		that are not named exactly as specified above will not be accepted!}
+	It is suggested that you submit your preliminary
+	\texttt{Assignment\_6\_\emph{YourMacID}.tex} and
+	\texttt{Assignment\_6\_\emph{YourMacID}.pdf} files well before the
+	deadline so that your mark is not zero if, e.g., your computer fails
+	at 11:50 PM on March 14.
+	
+	\textbf{Although you are allowed to receive help from the
+		instructional staff and other students, your submission must be your
+		own work.  Copying will be treated as academic dishonesty! If any of
+		the ideas used in your submission were obtained from other students
+		or sources outside of the lectures and tutorials, you must
+		acknowledge where or from whom these ideas were obtained.}
+	
+	\newpage
+	
+	\subsection*{Background}
+	For any three regular expressions $\alpha$, $\beta$, and $\gamma$, the following properties hold:
+	\be
+	\item Commutativity of union: $ \alpha + \beta  = \beta + \alpha$
+	\item Associativity of union: $ (\alpha + \beta) + \gamma = \alpha + (\beta + \gamma)$
+	\item Associativity of concatenation: $(\alpha \beta) \gamma = \alpha (\beta  \gamma)$
+	\item Distribution of union: $ \alpha (\beta + \gamma) = \alpha \beta + \alpha  \gamma$ and $  (\beta + \gamma)\alpha =  \beta \alpha +   \gamma \alpha$.
+	\item $\emptyset$ is the identity element for union: $\alpha + \emptyset = \alpha$.
+	\item $\emptyset$ is the annihilator element for concatenation: $\alpha  \emptyset = \emptyset \alpha = \emptyset$.
+	\item $\epsilon$ is the identity element for concatenation: $\alpha  \epsilon = \alpha$.
+	\item Idempotence of Kleene star: $\alpha^{**} = \alpha^*$.
+	\item Some additional properties of Kleene star:
+		\be
+			\item $\alpha^* + \epsilon = \alpha^*$
+			\item $\alpha^* + \alpha^* = \alpha^*$
+			\item $\alpha^*\alpha^* = \alpha^*$
+			\item $\alpha\alpha^* + \epsilon = \alpha^*$
+			\item $\alpha^*\alpha + \epsilon = \alpha^*$
+		\ee
+	\ee
+	
+	\subsection*{Problems}
+	
+	\be
+	
+	\item The regular expression $\alpha = (0110 + 01) (10)^*$ can be written in a more simplified way. 
+	\be
+	\item \textbf{[10 points]} By reasoning based on $L(\alpha)$, define a shorter regular expression equal to $\alpha$. Explain your reasoning.
+	\\\\
+	$L(\alpha)$ can be simplifieda as $(01) (10)^*$. Because $\alpha = (0110 + 01) (10)^*$ defines a set of strings that 
+	begin with 0110 or 01 and the rest of string is consist of concatenation of 10, $(10)^n$ (n $>=$ 0).
+	The string that begin with 0110 can be regarded that they begin with 01, and the 10 right after the 01 
+	can be regarded that it is combined with the $(10)^n$ while $n = n + 1$. In this way, all the strings that
+	begin with 0110 can be expressed as strings that begin with 01. For example, $01101010$ can be 
+	expressed as $(0110) (10)^2$ or $(01) (10)^3$. 
+
+	\item \textbf{[10 points]} Using the properties explained above, prove that the expression you came up with in (a), is indeed equal to $\alpha$.
+	\begin{proof}
+		$(0110 + 01) (10)^*$ = $(01) (10)^*$
+	\begin{align*}
+	    &  (0110 + 01) (10)^*         & \pnote{LHS}\\
+	    &= (0110 + 01 \epsilon) (10)^*       & \pnote{$\epsilon$ is the identity element for concatenation}\\
+		&= (01) (10 + \epsilon) (10)^* & \pnote{Distribution of union}\\
+		&= (01) ((10 + \epsilon) (10)^*)           & \pnote{Associativity of concatenation}\\
+		&= (01) ((10)(10)^*  + \epsilon (10)^*)                 & \pnote{Distribution of union}\\
+		&= (01) ((10)(10)^*  + (10)^*)                 & \pnote{$\epsilon$ is the identity element for concatenation}\\
+		&= (01) ((10)(10)^* + \epsilon + (10)^*)                 & \pnote{$\alpha^* + \epsilon = \alpha^*$}\\
+		&= (01) ((10)^* + (10)^*)                 & \pnote{$\alpha\alpha^* + \epsilon = \alpha^*$}\\
+		&= (01) (10)^*                 & \pnote{$\alpha^* + \alpha^* = \alpha^*$}
+	  \end{align*}
+	\ee
+	
+	\bigskip
+	
+	\textcolor{blue}{\textbf{Qiang Gao, gaoq20, 3/14/2021}}
+
+        \medskip
+
+        \noindent
+        
+
+\ee
+\end{document}
+
+
